@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="UTF-8"?><EntityModelCatalog>
+
+<dbInfo name="Model" uuid="DEB2380315EE8E47AF7052ECFC4FADBC"/>
+
+<extraProperties ____objectunic="true" version="1">
+
+	<classes ____objectunic="true">
+
+		<Employee ____objectunic="true" panelColor="#BFBFBF">
+
+			<panel ____objectunic="true" isOpen="true" pathVisible="true">
+
+				<position ____objectunic="true" X="10" Y="5"/>
+</panel>
+</Employee>
+
+		<Project ____objectunic="true" panelColor="#E5B9B7">
+
+			<panel ____objectunic="true" isOpen="true" pathVisible="true">
+
+				<position ____objectunic="true" X="407" Y="23"/>
+</panel>
+</Project>
+</classes>
+
+	<model ____objectunic="true"/>
+</extraProperties>
+
+<dataClasses name="Employee" className="Employee" collectionName="Employees" scope="public">
+
+	<attributes name="ID" kind="storage" scope="public" unique="true" autosequence="true" type="long" indexKind="btree" primKey="true"/>
+
+	<attributes name="firstName" kind="storage" scope="public" type="string"/>
+
+	<attributes name="lastName" kind="storage" scope="public" type="string"/>
+
+	<attributes name="birthDate" kind="storage" scope="public" type="date" simpleDate="false"/>
+
+	<attributes name="adress" kind="storage" scope="public" type="string"/>
+
+	<attributes name="manager" kind="relatedEntity" scope="public" type="Employee" path="Employee"/>
+
+	<attributes name="teamMembers" kind="relatedEntities" scope="public" type="Employees" reversePath="true" path="manager"/>
+
+	<attributes name="projectCollection" kind="relatedEntities" scope="public" type="Projects" reversePath="true" path="manager"/>
+
+	<attributes name="occupation" kind="storage" scope="public" type="string"/>
+
+	<attributes name="project" kind="calculated" scope="public" type="string" scriptKind="javascript">
+
+		<onGet from="guidedModel.Employee.project.onGet"/>
+
+	</attributes>
+
+</dataClasses>
+
+<dataClasses name="Project" className="Project" collectionName="Projects" scope="public">
+
+	<attributes name="ID" kind="storage" scope="public" unique="true" autosequence="true" type="long" indexKind="btree" primKey="true"/>
+
+	<attributes name="title" kind="storage" scope="public" type="string"/>
+
+	<attributes name="start" kind="storage" scope="public" type="date" simpleDate="false"/>
+
+	<attributes name="end" kind="storage" scope="public" type="date" simpleDate="false"/>
+
+	<attributes name="manager" kind="relatedEntity" scope="public" type="Employee" path="Employee"/>
+
+	<methods name="getManager" applyTo="dataClass" from="guidedModel.Project.methods.getManager" scope="public" returnType="string"/>
+
+</dataClasses>
+</EntityModelCatalog>
